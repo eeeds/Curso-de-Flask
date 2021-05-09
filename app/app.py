@@ -9,10 +9,14 @@ def index():
     return "Hola"
 """
 def index():
+<<<<<<< HEAD
     #Renderizar plantilla
     #return render_template('index.html', titulo = 'Pagina Principal')
     data = {'titulo': 'Index', 'encabezado': 'Bienvenido'}
     return render_template('index.html', data = data)
+=======
+    return "Bienvendio:"
+>>>>>>> master
 #Esto se verá al ir a esa ruta
 @app.route('/holaMundo')
 def hola_mundo():
