@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 
 #Se le pasa ese parámetro para luego saber si se trabajará con un archivo principal
 app = Flask(__name__)
@@ -9,7 +9,10 @@ def index():
     return "Hola"
 """
 def index():
-    return "Bienvendio:"
+    #Renderizar plantilla
+    #return render_template('index.html', titulo = 'Pagina Principal')
+    data = {'titulo': 'Index', 'encabezado': 'Bienvenido'}
+    return render_template('index.html', data = data)
 #Esto se verá al ir a esa ruta
 @app.route('/holaMundo')
 def hola_mundo():
