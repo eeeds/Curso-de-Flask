@@ -9,15 +9,36 @@ def index():
     return "Hola"
 """
 def index():
-<<<<<<< HEAD
     #Renderizar plantilla
     #return render_template('index.html', titulo = 'Pagina Principal')
     data = {'titulo': 'Index', 'encabezado': 'Bienvenido'}
     return render_template('index.html', data = data)
-=======
-    return "Bienvendio:"
->>>>>>> master
-#Esto se verá al ir a esa ruta
+
+@app.route('/contacto')
+def contacto():
+    data = {'titulo': 'Contacto', 'encabezado': 'Bienvenido'}
+    return render_template('contacto.html', data = data)
+#Esto se verá al ir a esa ruta, se define el parámetro nombre y deben tener el mismo nombre tanto en app como en la función.
+@app.route('/saludo/<nombre>')
+def saludo(nombre):
+    #return 'Hola, Codi'
+    return "Hola, {}".format(nombre)
+
+
+@app.route('/suma/<int:valor1>/<int:valor2>')
+def suma(valor1, valor2):
+    return 'La suma es: {}'.format((valor1+valor2))
+
+
+@app.route('/perfil/<nombre>/<int:edad>')
+def perfil(nombre, edad):
+    return 'Tu nombre es: {} y tu edad es {}'.format(nombre, edad)
+
+@app.route('/lenguajes')
+def lenguajes():
+    data={'hay_lenguajes':False, 'lenguajes':['PHP', 'Python', 'Kotlin', 'Java', 'C#', 'Javascript']}
+    return render_template('lenguajes.html', data = data)
+
 @app.route('/holaMundo')
 def hola_mundo():
     return "Hola mundo"
