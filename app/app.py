@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 #Se le pasa ese parámetro para luego saber si se trabajará con un archivo principal
 app = Flask(__name__)
@@ -8,7 +8,17 @@ app = Flask(__name__)
 def index():
     return "Hola"
 """
+
+@app.before_request
+def before_request():
+    print('Antes de la petición...')
+#after request necesita una respuesta por eso el return
+@app.after_request
+def after_request(response):
+    print('Luego de la petición')
+    return response
 def index():
+    print('Estamos accediendo a la vista')
     #Renderizar plantilla
     #return render_template('index.html', titulo = 'Pagina Principal')
     data = {'titulo': 'Index', 'encabezado': 'Bienvenido'}
@@ -38,6 +48,16 @@ def perfil(nombre, edad):
 def lenguajes():
     data={'hay_lenguajes':False, 'lenguajes':['PHP', 'Python', 'Kotlin', 'Java', 'C#', 'Javascript']}
     return render_template('lenguajes.html', data = data)
+
+
+@app.route('/datos')
+def datos():
+    #Obteniendo el valor con request
+    #print(request.args)
+    valor1 = request.args.get('valor1')
+    valor2 = request.args.get('valor2')
+
+    return "Estos son los datos:{}, {}".format(valor1, 15+int(valor2))
 
 @app.route('/holaMundo')
 def hola_mundo():
